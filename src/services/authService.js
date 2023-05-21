@@ -21,3 +21,5 @@ export const resetPassword = async (password, confirmPassword, token) => {
         return response.data;
     });
 }
+
+
