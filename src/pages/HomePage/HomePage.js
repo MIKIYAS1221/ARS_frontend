@@ -16,6 +16,11 @@ import Payment from "./TabPages/payment";
 import MaintenanceRequest from "./TabPages/MaintenanceRequest";
 import AddApartment from "./TabPages/AddApartement";
 import RequestRegister from "./TabPages/RequestRegister";
+import TenantList from "./TabPages/tenant";
+import LeaseAgreement from "./TabPages/allLeaseAgreement";
+import HandleMaintenance from "./TabPages/maintenanceHandle";
+import AddVisitors from "./TabPages/addVisitor";
+import AllVisitor from "./TabPages/AllVisitors";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -72,7 +77,7 @@ const HomePage = () => {
         <nav className="flex-1 mt-8 space-y-2">
         <TabItem
                 tabName="Home"
-                Icon={Clipboard}
+                Icon={House}
                 onClick={handleTabClick}
                 isActive={activeTab === "Home"}
               />
@@ -90,11 +95,29 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "Add Apartment"}
               />
+               <TabItem
+                tabName="all leaseagreement"
+                Icon={Clipboard}
+                onClick={handleTabClick}
+                isActive={activeTab === "all leaseagreement"}
+              />
               <TabItem
                 tabName="Register Requests"
                 Icon={Clipboard}
                 onClick={handleTabClick}
                 isActive={activeTab === "Register Requests"}
+              />
+              <TabItem
+                tabName="Handle Maintenance"
+                Icon={Clipboard}
+                onClick={handleTabClick}
+                isActive={activeTab === "Handle Maintenance"}
+              />
+              <TabItem
+                tabName="all tenant"
+                Icon={Clipboard}
+                onClick={handleTabClick}
+                isActive={activeTab === "all tenant"}
               />
             </>
           )}
@@ -112,6 +135,12 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "Payment"}
               />
+              <TabItem
+                tabName="Add Visitors"
+                Icon={User}
+                onClick={handleTabClick}
+                isActive={activeTab === "Add Visitors"}
+              />
             </>
           )}
           {signedInUser && signedInUser.role === "user" && (
@@ -124,6 +153,18 @@ const HomePage = () => {
           />
           </>
           )}
+          {
+            signedInUser && signedInUser.role === "security guard" && (
+              <>
+                <TabItem
+                  tabName="Visitor"
+                  Icon={Clipboard}
+                  onClick={handleTabClick}
+                  isActive={activeTab === "Visitor"}
+                />
+              </>
+            )
+          }
 
           <TabItem
             tabName="Profile"
@@ -144,11 +185,16 @@ const HomePage = () => {
         {activeTab === "Home" && <Home />}
         {activeTab === "Profile" && <Profile />}
         {activeTab === "All Apartments" && <AllApartments />}
+        {activeTab === "all leaseagreement" && <LeaseAgreement />}
+        {activeTab === "all tenant" && <TenantList />}
         {activeTab === "Add Apartment" && <AddApartment />}
         {activeTab === "Maintenance" && <MaintenanceRequest />}
         {activeTab === "Applications" && <Applications />}
         {activeTab === "Payment" && <Payment />}
         {activeTab === "Register Requests" && <RequestRegister />}
+        {activeTab === "Handle Maintenance" && <HandleMaintenance />}
+        {activeTab === "Add Visitors" && <AddVisitors />}
+        {activeTab === "Visitor" && <AllVisitor />}
       </main>
     </div></>
   );
